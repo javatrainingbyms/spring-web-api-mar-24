@@ -16,4 +16,5 @@ public class Student {
 	private String branch;
 	private int semester;
 	private int marks;
+	private String email;
 }

@@ -1,0 +1,14 @@
+DELIMITER $$
+DROP PROCEDURE IF EXISTS V20240305171138__Alter_student $$
+CREATE PROCEDURE V20240305171138__Alter_student()
+BEGIN
+
+IF NOT EXISTS ((SELECT * FROM information_schema.Columns WHERE table_schema=DATABASE() AND table_name='student' AND column_name='email')) THEN 
+ALTER TABLE `student` 
+ADD COLUMN `email` VARCHAR(45);
+END IF; 
+
+END $$
+CALL V20240305171138__Alter_student() $$
+DROP PROCEDURE IF EXISTS V20240305171138__Alter_student $$
+DELIMITER ;
