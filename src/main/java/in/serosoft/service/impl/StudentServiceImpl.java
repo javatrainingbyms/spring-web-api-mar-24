@@ -17,20 +17,17 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public Student save(Student student) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDAO.save(student);
 	}
 
 	@Override
 	public Student update(Student student) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDAO.update(student);
 	}
 
 	@Override
 	public Student delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDAO.delete(id);
 	}
 
 	@Override
@@ -41,8 +38,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<Student> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDAO.findAll();
 	}
 
 }
