@@ -2,18 +2,23 @@ package in.serosoft.service.impl;
 
 import java.util.List;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.serosoft.dao.StudentDAO;
 import in.serosoft.entity.Student;
 import in.serosoft.service.StudentService;
+import in.serosoft.ws.WSStudent;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentDAO studentDAO;
+	
+	@Autowired
+	private DozerBeanMapper mapper;
 	
 	@Override
 	public Student save(Student student) {
@@ -39,6 +44,18 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<Student> findAll() {
 		return studentDAO.findAll();
+	}
+
+	@Override
+	public WSStudent findBranchInfo(int id) {
+		Student student=studentDAO.findById(id);
+		WSStudent wsStudent=mapper.map(student, WSStudent.class);
+		if(student.getMarks()>=33) {
+			wsStudent.setResult("passed");
+		}else {
+			wsStudent.setResult("failed");
+		}
+		return wsStudent;
 	}
 
 }
