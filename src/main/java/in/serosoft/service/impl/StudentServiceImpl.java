@@ -1,6 +1,7 @@
 package in.serosoft.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,9 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public WSStudent findBranchInfo(int id) {
-		Student student=studentDAO.findById(id);
-		WSStudent wsStudent=mapper.map(student, WSStudent.class);
-		if(student.getMarks()>=33) {
+		Map map=studentDAO.findBranchInfo(id);
+		WSStudent wsStudent=mapper.map(map, WSStudent.class);
+		if(wsStudent.getMarks()>=33) {
 			wsStudent.setResult("passed");
 		}else {
 			wsStudent.setResult("failed");

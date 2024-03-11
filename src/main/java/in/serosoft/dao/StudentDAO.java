@@ -1,6 +1,7 @@
 package in.serosoft.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import in.serosoft.entity.Student;
 
@@ -10,6 +11,7 @@ public interface StudentDAO {
 	public Student delete(int id);
 	public Student findById(int id);
 	public List<Student> findAll();
+	public Map findBranchInfo(int id);
 	//...
 	//...
 	

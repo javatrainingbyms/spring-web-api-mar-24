@@ -1,16 +1,19 @@
 package in.serosoft.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import in.serosoft.dao.StudentDAO;
 import in.serosoft.entity.Student;
+import in.serosoft.utility.DAOUtil;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -63,6 +66,22 @@ public class StudentDAOImpl implements StudentDAO {
 		List<Student> studentList=criteria.list();
 		session.close();
 		return studentList;
+	}
+
+	@Override
+	public Map findBranchInfo(int id) {
+		Session session=sessionFactory.openSession();
+		Criteria criteria=session.createCriteria(Student.class);
+		criteria.add(Restrictions.eq("id", id));
+		Map<String,String> map=DAOUtil.getProjectionInstance();
+		map.put("id", "id");
+		map.put("name","name");
+		map.put("marks","marks");
+		map.put("email","email");
+		DAOUtil.createProjection(criteria, map);
+		Map studentMap=(Map)criteria.uniqueResult();
+		session.close();
+		return studentMap;
 	}
 
 }

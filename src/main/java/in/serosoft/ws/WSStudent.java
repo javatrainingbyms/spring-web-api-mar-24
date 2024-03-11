@@ -8,4 +8,5 @@ public class WSStudent {
 	private String name;
 	private int marks;
 	private String result;
+	private String email;
 }

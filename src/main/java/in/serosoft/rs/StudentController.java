@@ -27,7 +27,8 @@ public class StudentController {
 	
 	@GetMapping(value="findBranchInfo", produces = "application/json")
 	public WSStudent findByBranchInfo(@RequestParam("id") int id) {
-		return studentService.findBranchInfo(id);
+		WSStudent wsStudent= studentService.findBranchInfo(id);
+		return wsStudent;
 	}
 	
 	@GetMapping(value="findById", produces = "application/json")
