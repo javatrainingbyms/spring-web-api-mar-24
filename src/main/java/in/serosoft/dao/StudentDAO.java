@@ -12,6 +12,8 @@ public interface StudentDAO {
 	public Student findById(int id);
 	public List<Student> findAll();
 	public Map findBranchInfo(int id);
+	public List<Map> findAllBranchInfo();
+	public List<Map> findStudentProjectInfo();
 	//...
 	//...
 	

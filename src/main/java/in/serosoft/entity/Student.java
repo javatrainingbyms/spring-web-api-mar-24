@@ -1,11 +1,12 @@
 package in.serosoft.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 import lombok.Data;
@@ -24,4 +25,6 @@ public class Student {
 	private int marks;
 	@NotAudited
 	private String email;
+	@OneToMany(mappedBy="student")
+	private List<Project> projects;
 }

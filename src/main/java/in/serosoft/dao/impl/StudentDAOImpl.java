@@ -83,5 +83,32 @@ public class StudentDAOImpl implements StudentDAO {
 		session.close();
 		return studentMap;
 	}
+	@Override
+	public List<Map> findAllBranchInfo() {
+		Session session=sessionFactory.openSession();
+		Criteria criteria=session.createCriteria(Student.class);
+		Map<String,String> map=DAOUtil.getProjectionInstance();
+		map.put("id", "id");
+		map.put("name","name");
+		map.put("marks","marks");
+		map.put("email","email");
+		DAOUtil.createProjection(criteria, map);
+		List<Map> listOfMap=criteria.list();
+		session.close();
+		return listOfMap;
+	}
 
+	@Override
+	public List<Map> findStudentProjectInfo() {
+		Session session=sessionFactory.openSession();
+		Criteria criteria=session.createCriteria(Student.class);
+		criteria.createAlias("projects", "project");
+		Map<String,String> map=DAOUtil.getProjectionInstance();
+		map.put("name","name");
+		map.put("project.title","title");
+		DAOUtil.createProjection(criteria, map);
+		List<Map> listOfMap=criteria.list();
+		session.close();
+		return listOfMap;
+	}
 }
